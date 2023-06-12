@@ -1,6 +1,7 @@
 package de.sirvierl0ffel.viswiz.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 public class Post {
 
     @Id
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     @OneToOne
     private User user;

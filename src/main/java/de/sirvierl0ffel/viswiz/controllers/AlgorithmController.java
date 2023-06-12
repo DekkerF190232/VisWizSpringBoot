@@ -1,11 +1,8 @@
 package de.sirvierl0ffel.viswiz.controllers;
 
 import de.sirvierl0ffel.viswiz.models.Algorithm;
-import de.sirvierl0ffel.viswiz.models.Post;
 import de.sirvierl0ffel.viswiz.respositories.AlgorithmRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +17,21 @@ public class AlgorithmController {
         this.repo = repo;
     }
 
-    @GetMapping("all")
+    @GetMapping("/algorithm/all")
     public List<Algorithm> all() {
         return repo.findAll();
+    }
+
+    @PostMapping("/algorithm/new")
+    public long post(@RequestBody Algorithm algorithm) {
+        Algorithm result = repo.save(algorithm);
+        return result.id;
+    }
+
+    @DeleteMapping("/algorithms/delete/{id}")
+    public String delete(@PathVariable long id) {
+        repo.deleteById(id);
+        return "Success";
     }
 
 }
